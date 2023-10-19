@@ -19,7 +19,7 @@ def calculate_age(birthdate):
 # 사용자로부터 생년월일을 입력받기
 birthdate = input("생년월일을 입력하세요 (예: 2000-01-01): ")
 
-# 나이 계산
+# 나이 계산 로직
 age = calculate_age(birthdate)
 print("만 나이는", age, "세입니다.")
 
