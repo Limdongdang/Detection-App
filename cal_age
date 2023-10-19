@@ -1,0 +1,25 @@
+from datetime import datetime
+
+def calculate_age(birthdate):
+    # 현재 날짜 가져오기
+    current_date = datetime.now()
+
+    # 생년월일을 날짜 형식으로 변환
+    birthdate = datetime.strptime(birthdate, "%Y-%m-%d")
+
+    # 나이 계산
+    age = current_date.year - birthdate.year
+
+    # 생일이 지났는지 체크
+    if (current_date.month, current_date.day) < (birthdate.month, birthdate.day):
+        age -= 1
+
+    return age
+
+# 사용자로부터 생년월일을 입력받기
+birthdate = input("생년월일을 입력하세요 (예: 2000-01-01): ")
+
+# 나이 계산
+age = calculate_age(birthdate)
+print("만 나이는", age, "세입니다.")
+
