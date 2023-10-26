@@ -1,90 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>멤버 및 책 관리</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Detection App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    <h1>멤버 및 책 관리</h1>
-    
-    <!-- 멤버 추가 폼 -->
-    <form method="POST" action="/add_member">
-		<input type="text" name="member_name" placeholder="멤버 이름" required>
-		<input type="text" name="member_phone" placeholder="전화번호" required>
-		<button type="submit">멤버 추가</button>
-    </form>
-    
-    <!-- 멤버 목록 -->
-    <h2>멤버 목록</h2>
-    <ul>
-        {% for member, phone in members.items() %}
-            <li>
-                {{ member }} (전화번호: {{ phone }})
-                <form method="POST" action="/delete_member">
-                    <input type="hidden" name="member_name" value="{{ member }}">
-                    <button type="submit">멤버 삭제</button>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <h1>사진 인식 웹 페이지</h1>
+                <p>간단한 이미지 인식</p>
+                
+                <form action="/" method="post" enctype="multipart/form-data">
+                    <div class="input-group mb-3">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="file" name="file" onchange="displaySelectedFile()">
+                            <label class="custom-file-label" for="file">Choose file</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-upload"></i> Upload and Detect</button>
+                        </div>
+                    </div>
                 </form>
-            </li>
-        {% endfor %}
-    </ul>
-    
-    <!-- 책 추가 폼 -->
-    <form method="POST" action="/add_book">
-        <input type="text" name="book_name" placeholder="책 이름" required>
-        <button type="submit">책 추가</button>
-    </form>
-    
-    <!-- 책 목록 -->
-    <h2>책 목록</h2>
-    <ul>
-        {% for book, status in books.items() %}
-            <li>
-                {{ book }} (상태: {{ status }})
-                <form method="POST" action="/delete_book">
-                    <input type="hidden" name="book_name" value="{{ book }}">
-                    <button type="submit">책 삭제</button>
-                </form>
-                <form method="POST" action="/borrow_book">
-                    <input type="hidden" name="book_name" value="{{ book }}">
-                    <select name="member_name">
-                        <option value="">멤버 선택</option>
-                        {% for member in members %}
-                            <option value="{{ member }}">{{ member }}</option>
-                        {% endfor %}
-                    </select>
-                    <button type="submit">책 대출</button>
-                </form>
-                <form method="POST" action="/return_book">
-                    <input type="hidden" name="book_name" value="{{ book }}">
-                    <select name="member_name">
-                        <option value="">멤버 선택</option>
-                        {% for member in members %}
-                            <option value="{{ member }}">{{ member }}</option>
-                        {% endfor %}
-                    </select>
-                    <button type="submit">책 반납</button>
-                </form>
-            </li>
-        {% endfor %}
-    </ul>
-	
-	<!-- 멤버 목록 -->
-    <h2>멤버 정보</h2>
-    <ul>
-        {% for member, phone in members.items() %}
-            <li>
-                {{ member }} (전화번호: {{ phone }})
-            </li>
-        {% endfor %}
-    </ul>
-	
-	<!-- 책 상태 정보 -->
-    <h2>책 상태 정보</h2>
-    <ul>
-        {% for book, status in books.items() %}
-            <li>
-                {{ book }} (상태: {{ status }})
-            </li>
-        {% endfor %}
-    </ul>
+
+                <div id="result">
+                    {% if result_img %}
+                    <img src="{{ result_img }}" alt="Detected Image" width="500px">
+                    {% endif %}
+                </div>
+                <div id="selectedFile"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function displaySelectedFile() {
+            const fileInput = document.getElementById('file');
+            const selectedFileDiv = document.getElementById('selectedFile');
+            if (fileInput.files.length > 0) {
+                selectedFileDiv.textContent = `Selected File: ${fileInput.files[0].name}`;
+            } else {
+                selectedFileDiv.textContent = '';
+            }
+        }
+    </script>
 </body>
 </html>
