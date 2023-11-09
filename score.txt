@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 점merge conflict 실안녕하세요 안녕하세요
 
 ㄴasdasdasdasdasdasdad falkjbfh awhebf
 wae klfwabef klhawbe flawihbe falwih bf
 waek wabkej fhbwaej kfhbawkje hbfwajkh b입니다.
+=======
+점merge conflict 실습수
+asdalskjdal;sdjkasl;djan
+dwalkdjanwkldjanwkldjanwlkdjanw wd kaljwdn
+wd aklwjd nawlk jdanw kljawn doqdwun 
+ alwjd nk ljnqd w 는 "" 입니다.
+>>>>>>> test
